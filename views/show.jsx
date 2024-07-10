@@ -1,5 +1,6 @@
 const React = require("react");
 const Def = require("./default");
+const Comment = require("../models/comment.js");
 
 function show({ pet }) {
   let comments = <h3 className="inactive">No comments yet!</h3>;
