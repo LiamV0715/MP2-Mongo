@@ -36,6 +36,6 @@ Knowing where to start and how to distribute the work was a challenge. We create
 
 ### To report a bug or make suggestions
 
-Submit an issue here
+Submit an issue [here] (https://github.com/LiamV0715/MP2-Mongo/issues) explaining the problem or improvements you'd like to see. 
 
 ## License
