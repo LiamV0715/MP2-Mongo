@@ -1,6 +1,7 @@
 const express = require("express");
 const pets = express.Router();
 const Pet = require("../models/pets.js");
+require('dotenv').config();
 
 // INDEX
 pets.get("/", (req, res) => {

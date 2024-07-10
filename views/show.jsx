@@ -30,7 +30,7 @@ function show (data) {
           <main>
             <div className="row">
               <div className="col-sm-6">
-                <img src={data.pet.pic} alt={data.pet.name} />
+                <img src={data.pet.image} alt={data.pet.name} />
                 <h3>
                  is {data.pet.age} years old,
                 </h3>

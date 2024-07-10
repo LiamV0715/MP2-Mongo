@@ -8,8 +8,9 @@ function index(data) {
         <h2>
           <a href={`/pets/${pet.id}`}>{pet.name}</a>
         </h2>
-        <p className="text-center">{pet.age}</p>
-        <img src={pet.pic} alt={pet.name} />
+        <img src={pet.pic} alt={pet.name}></img>
+        <p className="text-center">{pet.age} years old</p>
+        <p className="text-center">{pet.weight} lbs</p>
       </div>
     );
   });
