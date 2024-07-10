@@ -26,6 +26,7 @@ function show({ pet }) {
       );
     });
   }
+
   return (
     <Def>
       <main>
@@ -37,12 +38,12 @@ function show({ pet }) {
           <div className="col-sm-6">
             <h3>{pet.showEstablished()}</h3>
             <br />
-            <a href={`/pets/${pet.id}/edit`} className="btn btn-warning">
+            <a href={`/pets/${pet._id}/edit`} className="btn btn-warning">
               Edit
             </a>
             {` `}
-            <form method="POST" action={`/pets/${pet.id}?_method=DELETE`}>
-              <button type="submit" className="btn btn-danger" href='/'>
+            <form method="POST" action={`/pets/${pet._id}?_method=DELETE`}>
+              <button type="submit" className="btn btn-danger">
                 Delete
               </button>
             </form>
@@ -53,15 +54,15 @@ function show({ pet }) {
         <div className="row">{comments}</div>
         <hr />
         <h2>Want to leave a comment? (They love compliments!)</h2>
-        <form action={`/pets/${pet.id}/comment`} method="POST">
+        <form action={`/pets/${pet._id}/comment`} method="POST">
           <div className="row">
             <div className="form-group col-sm-12">
               <label htmlFor="content">Content</label>
-              <textarea
+              <input
                 id="content"
                 name="content"
                 className="form-control"
-              ></textarea>
+              />
             </div>
           </div>
           <div className="row">

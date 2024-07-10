@@ -34,7 +34,7 @@ pets.get("/:id", (req, res) => {
       }
     })
     .catch((err) => {
-      console.error("Error finding pet:", err); 
+      console.error("Error finding pet:", err);
       res.status(500).send("Error finding pet");
     });
 });
@@ -71,8 +71,54 @@ pets.put("/:id", (req, res) => {
 //delete
 pets.delete("/:id", (req, res) => {
   Pet.findByIdAndDelete(req.params.id).then((deletedPet) => {
-    res.status(303).redirect("/breads");
+    res.status(303).redirect("/pets");
   });
+});
+
+//POST A COMMENT
+pets.post("/:id/comment", (req, res) => {
+  console.log("post comment", req.body);
+  if (req.body.author === "") {
+    req.body.author = undefined;
+  }
+  Pet.findById(req.params.id)
+    .populate("comments")
+    .then((pet) => {
+      db.Comment.create(req.body)
+        .then((comment) => {
+          console.log("Created comment:", comment);
+          pet.comments.push(comment.id);
+          pet
+            .save()
+            .then(() => {
+              res.redirect(`/pets/${req.params.id}`);
+            })
+            .catch((err) => {
+              console.error("Error saving pet:", err);
+              res.render("error404");
+            });
+        })
+        .catch((err) => {
+          console.error("Error creating comment:", err);
+          res.render("error404");
+        });
+    })
+    .catch((err) => {
+      res.render("error404");
+    });
+});
+
+//DELETE A COMMENT
+pets.delete("/:id/comment/:commentId", (req, res) => {
+  db.Comment.findByIdAndDelete(req.params.commentId)
+    .then(() => {
+      console.log("Success");
+      res.redirect(`/pets/${req.params.id}`);
+    })
+    .catch((err) => {
+      console.log("err", err);
+      res.render("error404");
+    });
 });
 
 module.exports = pets;

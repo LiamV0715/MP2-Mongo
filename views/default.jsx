@@ -9,7 +9,10 @@ function Def (html) {
                 <link rel="stylesheet" href="/css/style.css"/>
                 <link rel="manifest" href="/site.webmanifest"></link>
             </head>
-            <body>
+            <body style={{
+                margin: "auto",
+                padding: "5px"
+            }}>
                 <nav>
                     <ul>
                         <li>

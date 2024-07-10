@@ -18,6 +18,7 @@ app.engine('jsx', require('express-react-views').createEngine())
 app.use(express.urlencoded({extended: true}))
 app.use(express.static('public'))
 app.use(methodOverride('_method'))
+app.use(express.json()) // For JSON 
 
 // MODELS
 require('./models/pets.js');
