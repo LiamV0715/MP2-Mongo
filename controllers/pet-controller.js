@@ -1,133 +1,75 @@
-const router = require("express").Router();
-const db = require("../models");
-const Pet = require('../models/pets.js')
+const express = require("express");
+const pets = express.Router();
+const Pet = require("../models/pets.js");
 
-router.get("/", (req, res) => {
-  db.Pet.find()
-    .then((pets) => {
-      res.render("pets/index", { pets });
-    })
-    .catch((err) => {
-      console.log("err", err);
-      res.render("error404");
+// INDEX
+pets.get("/", (req, res) => {
+  Pet.find().then((foundPets) => {
+    res.render("index", {
+      pets: foundPets,
+      title: "Index Page",
     });
+  });
 });
 
-router.post("/", (req, res) => {
-  if (req.body.pic === "") {
-    req.body.pic = undefined;
-  }
-  if (req.body.weight === "") {
-    req.body.weight = undefined;
-  }
-  if (req.body.age === "") {
-    req.body.age = undefined;
-  }
-  db.Pet.create(req.body)
-    .then(() => {
-      res.redirect("/pets");
-    })
-    .catch((err) => {
-      if (err && err.name == "ValidationError") {
-        let message = "Validation Error: ";
-        for (var field in err.errors) {
-          message += `${field} was ${err.errors[field].value}. ${err.errors[field].message}\n`;
-        }
-        res.render("pets/new", { message });
-      } else {
-        res.render("error404");
-      }
-    });
+//NEW
+pets.get("/new", (req, res) => {
+  
+    res.render("new", );
+  ;
 });
 
-router.get("/new", (req, res) => {
-  res.render("pets/new");
-});
-
-router.get("/:id", (req, res) => {
-  db.Pet.findOne({ _id: req.params.id })
+// SHOW
+pets.get("/:id", (req, res) => {
+  Pet.findById(req.params.id)
     .populate("comments")
-    .then((pet) => {
-      console.log(pet.comments);
-      res.render("pets/show", { pet });
+    .then((foundPet) => {
+      res.render("show", {
+        pet: foundPet,
+      });
     })
     .catch((err) => {
-      console.log("err", err);
-      res.render("error404");
+      res.send("404");
     });
 });
 
-router.put("/:id", (req, res) => {
-  db.Pet.findByIdAndUpdate(req.params.id, req.body)
-    .then(() => {
-      res.redirect(`/pets/${req.params.id}`);
-    })
-    .catch((err) => {
-      console.log("err", err);
-      res.render("error404");
-    });
-});
-
-router.delete("/:id", (req, res) => {
-  db.Pet.findByIdAndDelete(req.params.id)
-    .then(() => {
-      res.redirect("/pets");
-    })
-    .catch((err) => {
-      console.log("err", err);
-      res.render("error404");
-    });
-});
-
-router.get("/:id/edit", (req, res) => {
-  db.Pet.findById(req.params.id)
-    .then((pet) => {
-      res.render("pets/edit", { pet });
-    })
-    .catch((err) => {
-      res.render("error404");
-    });
-});
-
-router.post("/:id/comment", (req, res) => {
-  console.log("post comment", req.body);
-  if (req.body.author === "") {
-    req.body.author = undefined;
+// CREATE
+pets.post("/", (req, res) => {
+  if (!req.body.image) {
+    req.body.image = undefined;
   }
-
-  db.Pet.findById(req.params.id)
-    .then((pet) => {
-      db.Comment.create(req.body)
-        .then((comment) => {
-          place.comments.push(comment.id);
-          place
-            .save()
-            .then(() => {
-              res.redirect(`/pets/${req.params.id}`);
-            })
-            .catch((err) => {
-              res.render("error404");
-            });
-        })
-        .catch((err) => {
-          res.render("error404");
-        });
-    })
-    .catch((err) => {
-      res.render("error404");
-    });
+  
+  Pet.create(req.body);
+  res.redirect("/pets");
 });
 
-router.delete("/:id/comment/:commentId", (req, res) => {
-  db.Comment.findByIdAndDelete(req.params.commentId)
-    .then(() => {
-      console.log("Success");
+// EDIT
+pets.get("/:id/edit", (req, res) => {
+  
+    Pet.findById(req.params.id).then((foundPet) => {
+      res.render("edit", {
+        pet: foundPet,
+      });
+    });
+  
+});
+
+// UPDATE
+pets.put("/:id", (req, res) => {
+  
+  Pet.findByIdAndUpdate(req.params.id, req.body, { new: true }).then(
+    (updatedPet) => {
+      console.log(updatedPet);
       res.redirect(`/pets/${req.params.id}`);
-    })
-    .catch((err) => {
-      console.log("err", err);
-      res.render("error404");
-    });
+    }
+  );
 });
 
-module.exports = router;
+//delete
+pets.delete("/:id", (req, res) => {
+  Pet.findByIdAndDelete(req.params.id).then((deletedPet) => {
+    res.status(303).redirect("/breads");
+  });
+});
+
+module.exports = pets;
