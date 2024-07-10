@@ -16,13 +16,13 @@ This MERN stack application was submitted as the second major project for our So
 
 The beginning stages of the project were challenging as this was our first group project and by far the most complicated assignment in the program. After landing on an idea for our application, we created mockups using Adobe Illustrator to get an idea of styling and layout.
 
-![Home page mockup](public/homepagemockup.png)
+![Home page mockup](public/css/images/homepagemockup.png)
 
-![Gallery page mockup](public/gallerymockup.png)
+![Gallery page mockup](public/css/images/gallerymockup.png)
 
 Knowing where to start and how to distribute the work was a challenge. We created a shared Google Doc to outline tasks and begin the planning process. 
 
-![First stage of planning](public/firstplanningstage.png)
+![First stage of planning](public/css/images/firstplanningstage.png)
 
 ## Contributing
 
