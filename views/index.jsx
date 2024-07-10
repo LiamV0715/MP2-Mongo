@@ -5,9 +5,9 @@ function index(data) {
   let petsFormatted = data.pets.map((pet) => {
     return (
       <div className="col-sm-6">
-        <h2>
-          <a href={`/pets/${pet.id}`}>{pet.name}</a>
-        </h2>
+        <li key={index}>
+          <a href={`/pets/${pet._id}`}>{pet.name}</a>
+        </li>
         <img src={pet.pic} alt={pet.name}></img>
         <p className="text-center">{pet.age} years old</p>
         <p className="text-center">{pet.weight} lbs</p>

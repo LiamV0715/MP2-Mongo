@@ -19,6 +19,9 @@ app.use(express.urlencoded({extended: true}))
 app.use(express.static('public'))
 app.use(methodOverride('_method'))
 
+// MODELS
+require('./models/pets.js');
+require('./models/comment.js');
 
 // ROUTES
 app.get('/', (req, res) => {

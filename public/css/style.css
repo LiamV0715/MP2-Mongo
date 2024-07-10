@@ -41,6 +41,7 @@
     background-color: lightblue;
     text-align: center;
     margin-top: 20px;
+    padding: 10px;
   }
   
   main {
@@ -49,15 +50,18 @@
     margin-top: 10px;
     background-color: white;
     border-radius: 25px;
+    padding: 10px;
   }
   
   h1 {
     text-align: center;
-    color: cornflowerblue;
+    color: rgb(33, 141, 196);
     text-shadow: 2px 5px 2px rgb(161, 161, 161);
     text-decoration: none;
     -webkit-text-stroke-width: 2px;
     -webkit-text-stroke-color: black;
+    background-color: lightcyan;
+    border-radius: 30px;
   }
   
   #picture-option {
@@ -71,31 +75,46 @@
   nav {
     background-color: cornflowerblue;
     padding: 10px;
+    text-shadow: 2px 5px 2px rgb(161, 161, 161);
   }
   
   nav ul {
     list-style-type: none;
     margin: 0;
+    text-shadow: 2px 5px 2px rgb(161, 161, 161);
+    -webkit-text-stroke-width: 2px;
+    -webkit-text-stroke-color: black;
   }
   
   nav li {
     display: inline;
     margin-right: 25px;
+    text-shadow: 2px 5px 2px rgb(161, 161, 161);
+    -webkit-text-stroke-width: 1.5px;
+    -webkit-text-stroke-color: black;
   }
   
   nav a {
     color: white;
     font-size: 1.5em;
+    text-shadow: 2px 5px 2px rgb(161, 161, 161);
+    -webkit-text-stroke-width: 1.5px;
+    -webkit-text-stroke-color: black;
   }
   
   nav a:hover {
     color: pink;
     text-decoration: none;
+    text-shadow: 2px 5px 2px rgb(161, 161, 161);
+    -webkit-text-stroke-width: 2px;
+    -webkit-text-stroke-color: rgb(255, 129, 238);
   }
   
   img {
     max-width: 300px;
+    max-height: 400px;
     border-radius: 25px;
+    padding-top: 15px;
   }
   
   #views {
@@ -105,4 +124,39 @@
   
   button {
     margin-bottom: 25px;
+  }
+
+  h3 {
+    text-align: center;
+    margin: auto;
+    color: rgb(0, 118, 79);
+  }
+
+  label {
+    text-align: center;
+    margin: auto;
+    color: rgb(0, 118, 79);
+    padding: 20px;
+  }
+
+  form {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    padding: 30px;
+    background-color: aquamarine;
+    border:darkorchid 2px;
+    border-radius: 25px;
+  }
+
+  button {
+    padding: 10px;
+  }
+
+  input {
+    display: flex;
+    justify-content: space-evenly;
+    padding: 10px;
+    border-radius: 25px;
+    align-items: center;
   }
