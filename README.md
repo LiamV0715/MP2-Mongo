@@ -24,6 +24,24 @@ Knowing where to start and how to distribute the work was a challenge. We create
 
 ![First stage of planning](public/css/images/firstplanningstage.png)
 
+After working with Postgres proved to be challenging, we decided to switch to MongoDB. This switch allowed us to actually fetch data from the database. 
+
+## Running the project
+
+Run the following commands
+
+Frontend:
+
+```sh
+npm run start
+```
+
+Backend:
+
+```sh
+nodemon
+```
+
 ## Contributing
 
 ### To contribute code or documentation
