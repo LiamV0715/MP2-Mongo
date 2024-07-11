@@ -5,9 +5,12 @@ function New() {
   return (
     <Default>
       <h2>Add a new pet!</h2>
-      <form action="/pets/" method="POST">
+      <form action="/pets/" method="POST" style={{
+        marginLeft: "20%",
+        marginRight: "20%"
+      }}>
         <label htmlFor="name">Name</label>
-        <input type="text" name="name" id="name" required />
+        <input type="text" name="name" id="name" required style={{maxWidth: "30%"}}/>
         <label htmlFor="pic">Image</label>
         <input type="text" name="pic" id="pic" />
         <label htmlFor="weight">Weight</label>
