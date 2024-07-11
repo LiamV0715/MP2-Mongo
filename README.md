@@ -24,13 +24,32 @@ Knowing where to start and how to distribute the work was a challenge. We create
 
 ![First stage of planning](public/css/images/firstplanningstage.png)
 
+After working with Postgres proved to be challenging, we decided to switch to MongoDB. This switch allowed us to actually fetch data from the database. 
+
+## Running the project
+
+Run the following commands
+
+Frontend:
+
+```sh
+npm run start
+```
+
+Backend:
+
+```sh
+nodemon
+```
+
 ## Contributing
 
 ### To contribute code or documentation
 
 1. Fork this repository
 2. Clone the forked repository
-3. Add code or documentation
+3. run npm i --legacy-peer-deps
+4. Add code or documentation
 4. Commit and push
 5. Wait for pull request to be reviewed and merged
 

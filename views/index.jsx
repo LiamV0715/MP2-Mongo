@@ -4,7 +4,9 @@ const Def = require("./default");
 function index(data) {
   let petsFormatted = data.pets.map((pet) => {
     return (
-      <div className="col-sm-6">
+      <div className="col-sm-6" style={{
+        listStyleType: "none"
+      }}>
         <li key={index}>
           <a href={`/pets/${pet._id}`}>{pet.name}</a>
         </li>

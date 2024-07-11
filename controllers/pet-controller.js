@@ -89,7 +89,9 @@ pets.put("/:id", (req, res) => {
     });
 });
 
-// DELETE PET
+
+//DELETE
+
 pets.delete("/:id", (req, res) => {
   Pet.findByIdAndDelete(req.params.id).then((deletedPet) => {
     res.status(303).redirect("/pets");
