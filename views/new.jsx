@@ -10,7 +10,7 @@ function New() {
         marginRight: "20%"
       }}>
         <label htmlFor="name">Name</label>
-        <input type="text" name="name" id="name" required style={{maxWidth: "30%"}}/>
+        <input type="text" name="name" id="name" required/>
         <label htmlFor="pic">Image</label>
         <input type="text" name="pic" id="pic" />
         <label htmlFor="weight">Weight</label>
