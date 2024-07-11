@@ -47,8 +47,19 @@ pets.post("/", (req, res) => {
     req.body.image = undefined;
   }
 
-  Pet.create(req.body);
-  res.redirect("/pets");
+  // Ensure weight is a number
+  if (req.body.weight) {
+    req.body.weight = parseFloat(req.body.weight);
+  }
+
+  Pet.create(req.body)
+    .then(() => {
+      res.redirect("/pets");
+    })
+    .catch((err) => {
+      console.error("Error creating pet:", err);
+      res.status(400).send("Error creating pet");
+    });
 });
 
 // EDIT
@@ -62,12 +73,20 @@ pets.get("/:id/edit", (req, res) => {
 
 // UPDATE
 pets.put("/:id", (req, res) => {
-  Pet.findByIdAndUpdate(req.params.id, req.body, { new: true }).then(
-    (updatedPet) => {
+  // Ensure weight is a number
+  if (req.body.weight) {
+    req.body.weight = parseFloat(req.body.weight);
+  }
+
+  Pet.findByIdAndUpdate(req.params.id, req.body, { new: true })
+    .then((updatedPet) => {
       console.log(updatedPet);
       res.redirect(`/pets/${req.params.id}`);
-    }
-  );
+    })
+    .catch((err) => {
+      console.error("Error updating pet:", err);
+      res.status(400).send("Error updating pet");
+    });
 });
 
 // DELETE PET

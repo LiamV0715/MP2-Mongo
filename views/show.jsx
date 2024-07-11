@@ -26,6 +26,7 @@ function show({ pet }) {
       );
     });
   }
+
   return (
     <Def>
       <main>
