@@ -38,7 +38,7 @@ function show({ pet }) {
           <div className="col-sm-6">
             <h3>{pet.showEstablished()}</h3>
             <br />
-            <a href={`/pets/${pet._id}/edit`} className="btn btn-warning">
+            <a href={`/pets/${pet._id}/edit`} className="btn btn-success">
               Edit
             </a>
             {` `}
