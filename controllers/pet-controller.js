@@ -1,6 +1,7 @@
 const express = require("express");
 const pets = express.Router();
 const Pet = require("../models/pets.js");
+const db = require('../models'); // Ensure models are properly required
 require("dotenv").config();
 
 // INDEX
@@ -13,18 +14,19 @@ pets.get("/", (req, res) => {
   });
 });
 
-//NEW
+// NEW
 pets.get("/new", (req, res) => {
   res.render("new");
 });
 
-//SHOW
+// SHOW PET AND COMMENTS
 pets.get("/:id", (req, res) => {
   Pet.findById(req.params.id)
     .populate("comments")
     .then((foundPet) => {
       if (foundPet) {
         console.log("Pet found:", foundPet); // Log the found pet
+        console.log("Comments:", foundPet.comments); // Log the populated comments
         res.render("show", {
           pet: foundPet,
         });
@@ -45,8 +47,19 @@ pets.post("/", (req, res) => {
     req.body.image = undefined;
   }
 
-  Pet.create(req.body);
-  res.redirect("/pets");
+  // Ensure weight is a number
+  if (req.body.weight) {
+    req.body.weight = parseFloat(req.body.weight);
+  }
+
+  Pet.create(req.body)
+    .then(() => {
+      res.redirect("/pets");
+    })
+    .catch((err) => {
+      console.error("Error creating pet:", err);
+      res.status(400).send("Error creating pet");
+    });
 });
 
 // EDIT
@@ -60,64 +73,71 @@ pets.get("/:id/edit", (req, res) => {
 
 // UPDATE
 pets.put("/:id", (req, res) => {
-  Pet.findByIdAndUpdate(req.params.id, req.body, { new: true }).then(
-    (updatedPet) => {
+  // Ensure weight is a number
+  if (req.body.weight) {
+    req.body.weight = parseFloat(req.body.weight);
+  }
+
+  Pet.findByIdAndUpdate(req.params.id, req.body, { new: true })
+    .then((updatedPet) => {
       console.log(updatedPet);
       res.redirect(`/pets/${req.params.id}`);
-    }
-  );
+    })
+    .catch((err) => {
+      console.error("Error updating pet:", err);
+      res.status(400).send("Error updating pet");
+    });
 });
 
+
 //DELETE
+
 pets.delete("/:id", (req, res) => {
   Pet.findByIdAndDelete(req.params.id).then((deletedPet) => {
     res.status(303).redirect("/pets");
   });
 });
 
-//POST A COMMENT
-pets.post("/:id/comment", (req, res) => {
-  console.log("post comment", req.body);
-  if (req.body.author === "") {
-    req.body.author = undefined;
-  }
+// POST COMMENT
+pets.post('/:id/comment', (req, res) => {
+  console.log('post comment', req.body);
+  if (req.body.author === '') { req.body.author = undefined; }
   Pet.findById(req.params.id)
-    .populate("comments")
-    .then((pet) => {
+    .then(pet => {
       db.Comment.create(req.body)
-        .then((comment) => {
-          console.log("Created comment:", comment);
-          pet.comments.push(comment.id);
-          pet
-            .save()
+        .then(comment => {
+          console.log('Created comment:', comment);
+          pet.comments.push(comment._id);
+          pet.save()
             .then(() => {
               res.redirect(`/pets/${req.params.id}`);
             })
-            .catch((err) => {
-              console.error("Error saving pet:", err);
-              res.render("error404");
+            .catch(err => {
+              console.error('Error saving pet:', err);
+              res.render('error404');
             });
         })
-        .catch((err) => {
-          console.error("Error creating comment:", err);
-          res.render("error404");
+        .catch(err => {
+          console.error('Error creating comment:', err);
+          res.render('error404');
         });
     })
-    .catch((err) => {
-      res.render("error404");
+    .catch(err => {
+      console.error('Error finding pet:', err);
+      res.render('error404');
     });
 });
 
-//DELETE A COMMENT
-pets.delete("/:id/comment/:commentId", (req, res) => {
+// DELETE COMMENT
+pets.delete('/:id/comment/:commentId', (req, res) => {
   db.Comment.findByIdAndDelete(req.params.commentId)
     .then(() => {
-      console.log("Success");
+      console.log('Deleted comment');
       res.redirect(`/pets/${req.params.id}`);
     })
-    .catch((err) => {
-      console.log("err", err);
-      res.render("error404");
+    .catch(err => {
+      console.error('Error deleting comment:', err);
+      res.render('error404');
     });
 });
 

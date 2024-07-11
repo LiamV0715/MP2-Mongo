@@ -35,7 +35,7 @@ function home() {
         }}
       >
         <h1>WELCOME!!!</h1>
-        <a href="/gallery">Come take a look at our cute pets!!!</a>
+        <a href="/pets">Come take a look at our cute pets!!!</a>
         <div
           style={{
             maxWidth: "2000px",
@@ -90,7 +90,7 @@ function home() {
           </div>
         ))}
 
-        <a href="/Addapet">
+        <a href="/pets/new">
           <button className="btn-primary">Add Your Own Pet</button>
         </a>
       </main>

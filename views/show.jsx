@@ -58,11 +58,11 @@ function show({ pet }) {
           <div className="row">
             <div className="form-group col-sm-12">
               <label htmlFor="content">Content</label>
-              <input
+              <textarea
                 id="content"
                 name="content"
                 className="form-control"
-              />
+              ></textarea>
             </div>
           </div>
           <div className="row">
